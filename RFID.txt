@@ -1,0 +1,65 @@
+      
+      component 
+RFID 13.5 Hz Tags
+RFID RC522
+Jumper wire
+
+stp1
+strt menu -> preference -> ras pi config
+select interface tab -> spi enable -> ok -> reboot
+lsmod | grep spi ........? op spi_bcm2835
+
+stp2
+cd TYIT/10-RFID/
+git clone https://github.com/lthiery/SPI-Py.git
+cd SPI-Py
+sudo python setup.py install 
+
+stp3
+cd ../
+git clone https://github.com/pimylifeup/MFRC522-python.git
+cd MFRC522-python
+
+stp4
+sudo nano write.py
+
+
+#!/usr/bin/env python
+import RPi.GPIO as GPIO
+import SimpleMFRC522
+
+reader = SimpleMFRC522.SimpleMFRC522()
+
+try:
+        text = raw_input('New data')
+        print("Now place your tag to write")
+	reader.write(text)
+        print("written")
+finally:
+	GPIO.cleanup()
+
+sudo python write.py
+
+stp5
+
+sudo nano read.py
+
+
+#!/usr/bin/env python
+import RPi.GPIO as GPIO
+import SimpleMFRC522
+
+reader = SimpleMFRC522.SimpleMFRC522()
+
+try:
+        id, text = reader.read()
+        print(id)
+        print(text)
+finally:
+	GPIO.cleanup()
+
+sudo python write.py
+
+
+
+   

@@ -1,0 +1,64 @@
+
+      compo
+     1 led 
+      330 resistor 
+      1m-m jumper wire
+      
+stp1
+open bot father and create new and get access key 
+      
+stp2
+sudo apt-get update
+sudo apt-get upradge
+sudo apt-get install python-pip
+sudo pip install telepot
+      
+stp3
+bot= teleport.Bot("Bot Token/ access key")
+sudo python telegrambot.py
+      
+stp4
+search and start bot send on or off
+      
+      
+      
+Telegram code:
+import sys
+import time
+import telepot
+import RPi.GPIO as GPIO
+#LED
+def on(pin):
+ GPIO.output(pin, GPIO.HIGH)
+ return 'LED is On Now on BCM pin 5'
+def off(pin):
+ GPIO.output(pin, GPIO.LOW)
+ return 'LED is Off Now on BCM pin 5'
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(5, GPIO.OUT)
+def handle(msg):
+ chat_id = msg['chat']['id']
+ command = msg['text']
+ print('Got Command '+command)
+ if command == 'on':
+ bot.sendMessage(chat_id, on(5))
+ elif command == 'off':
+ bot.sendMessage(chat_id, off(5))
+ else :
+ bot.sendMessage(chat_id, 'Echo:'+command)
+bot = telepot.Bot('970040458:AAErVBNY3qrEoOhqqg4IxpKKqpZuQFvq5kY')
+bot.message_loop(handle)
+print('I am listening...')
+while 1:
+ try:
+ time.sleep(10)
+ except KeyboardInterrupt:
+ print('')
+ print('Program Interrupted')
+ GPIO.cleanup()
+ exit()
+ except:
+ print('other error of exception occured')
+ GPIO.cleanup(
+
+  

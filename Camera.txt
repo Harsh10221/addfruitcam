@@ -1,0 +1,33 @@
+
+APPARATUS: Camera Module
+THEORY: The Raspberry Pi Camera Board plugs directly into the CSI connector
+on the Raspberry Pi. The camera is supported in the latest version of Raspbian,
+the Raspberry Pi’s preferred operating system.
+The Raspberry Pi Camera Board Features:
+1. Fully Compatible with Both the Model A and Model B Raspberry Pi
+2. 5MP Omnivision 5647 Camera Module
+3. Still Picture Resolution: 2592 x 1944
+4. Video: Supports 1080p @ 30fps, 720p @ 60fps and 640x480p 60/90
+Recording
+5. 15-pin MIPI Camera Serial Interface – Plugs Directly into the Raspberry Pi
+Board
+6. Size: 20 x 25 x 9mm
+7. Weight 3g
+8. Fully Compatible with many Raspberry Pi cases
+PROCEDURE:
+1. Locate the camera port and connect the camera:
+2. Start up the Pi.
+3. Open the Raspberry Pi Configuration Tool from the main menu.
+4. Ensure the camera software is enabled. If it's not enabled, enable it and reboot
+your Pi to begin.
+CODE:
+from time import sleep
+from picamera import PiCamera
+camera = PiCamera()
+camera.resolution = (1280, 720) camera.start_preview()
+sleep(2)
+camera.capture('/home/pi/Pictures/newImage.jpg')
+camera.stop_preview() 
+
+
+        
